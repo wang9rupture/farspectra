@@ -1,0 +1,20 @@
+34000        lx
+19000         ly
+20000         lz
+50          dx
+50          dy
+50          dz
+12.0          T
+500.0         TT
+2670.0       rho
+6000.0       vp
+3464.0       vs 
+1            switch off for measure cornerfall
+1            ifrq1(index)
+2500          ifrq2(index)
+-1            falloff1in
+5	     falloff2in
+1000000         distance
+30           degree interval
+0.5          original degree
+

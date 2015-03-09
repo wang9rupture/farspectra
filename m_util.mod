@@ -1,0 +1,67 @@
+GFORTRAN module version '0' created from util.f90 on Mon Mar  9 10:25:24 2015
+MD5:8b20d5f5d9bf3846749c3d8aae21f8f1 -- If you edit this, you'll get what you deserve.
+
+(() () () () () ()
+() () () () () () () () () () () () () () () () () () () () ())
+
+()
+
+()
+
+()
+
+()
+
+(2 'cjkpq' 'm_util' 'cjkpq' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
+DECL UNKNOWN FUNCTION) (REAL 4 0 0 REAL ()) 3 0 (4 5 6 7) () 2 () () ()
+0 0)
+8 'coefp' 'm_util' 'coefp' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
+UNKNOWN FUNCTION ALWAYS_EXPLICIT) (REAL 4 0 0 REAL ()) 9 0 (10 11 12 13
+14) () 8 () () () 0 0)
+15 'coefs' 'm_util' 'coefs' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
+DECL UNKNOWN FUNCTION ALWAYS_EXPLICIT) (REAL 4 0 0 REAL ()) 16 0 (17 18
+19 20 21) () 15 () () () 0 0)
+22 'deltaf' 'm_util' 'deltaf' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
+DECL UNKNOWN FUNCTION) (INTEGER 4 0 0 INTEGER ()) 23 0 (24 25) () 22 ()
+() () 0 0)
+26 'm_util' 'm_util' 'm_util' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN) (UNKNOWN 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
+24 'p' '' 'p' 23 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+25 'q' '' 'q' 23 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+4 'j' '' 'j' 3 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+5 'k' '' 'k' 3 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+6 'p' '' 'p' 3 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+7 'q' '' 'q' 3 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+11 'j' '' 'j' 9 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+12 'm0' '' 'm0' 9 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+REAL 4 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
+13 'gamma' '' 'gamma' 9 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+DIMENSION DUMMY) (REAL 4 0 0 REAL ()) 0 0 () (1 ASSUMED_SHAPE (CONSTANT
+(INTEGER 4 0 0 INTEGER ()) 0 '1') ()) 0 () () () 0 0)
+14 'nv' '' 'nv' 9 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION
+DUMMY) (REAL 4 0 0 REAL ()) 0 0 () (1 ASSUMED_SHAPE (CONSTANT (INTEGER 4
+0 0 INTEGER ()) 0 '1') ()) 0 () () () 0 0)
+19 'm0' '' 'm0' 16 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+REAL 4 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
+18 'j' '' 'j' 16 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+20 'gamma' '' 'gamma' 16 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+DIMENSION DUMMY) (REAL 4 0 0 REAL ()) 0 0 () (1 ASSUMED_SHAPE (CONSTANT
+(INTEGER 4 0 0 INTEGER ()) 0 '1') ()) 0 () () () 0 0)
+10 'i' '' 'i' 9 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+17 'i' '' 'i' 16 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+21 'nv' '' 'nv' 16 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION
+DUMMY) (REAL 4 0 0 REAL ()) 0 0 () (1 ASSUMED_SHAPE (CONSTANT (INTEGER 4
+0 0 INTEGER ()) 0 '1') ()) 0 () () () 0 0)
+)
+
+('cjkpq' 0 2 'coefp' 0 8 'coefs' 0 15 'deltaf' 0 22 'm_util' 0 26)
