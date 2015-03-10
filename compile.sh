@@ -10,4 +10,4 @@
 #gfortran -I/usr/local/include fftw.f90 globals.f90  arrays.f90 util.f90 \
 #parameters.f90 timeseries.f90 spectra.f90 waveform5.f90  -O3 -lfftw3 -lm -o ../example/waveform
 mpif90 -I/export/home/wang/local/fftwgnu/include  fftw.f90 globals.f90  arrays.f90 util.f90 \
-parameters.f90 timeseries.f90 spectra.f90 waveform5.f90  -O3 -L/export/home/wang/local/fftwgnu/lib -lfftw3 -lm -o farspectra
+parameters.f90 timeseries.f90 spectra.f90 waveform6.f90  -O3 -L/export/home/wang/local/fftwgnu/lib -lfftw3 -lm -o farspectra

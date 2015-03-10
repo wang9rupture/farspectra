@@ -43,7 +43,8 @@ real :: &
         dist,     &
         deg0,     &
         ifrq1f,   &
-        ifrq2f
+        ifrq2f,   &
+        getfc
         
         
 integer :: &

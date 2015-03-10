@@ -22,6 +22,7 @@ read(22,*) rho
 read(22,*) vp
 read(22,*) vs
 read(22,*) soff
+read(22,*) getfc
 read(22,*) ifrq1f
 read(22,*) ifrq2f
 read(22,*) falloff1in
@@ -45,6 +46,7 @@ write(0,*) 'density kg/m^3 ',rho
 write(0,*) 'P wave velocity m/s ',vp
 write(0,*) 'S wave velocity m/s ',vs
 write(0,*) 'Only measure spect switch 1-no 2-yes ',soff
+write(0,*) 'Use getcorn or getcorn2 to measure fc', getfc
 write(0,*) 'Minimum freq Hz ',ifrq1f
 write(0,*) 'Maximum freq Hz ',ifrq2f
 write(0,*) 'Minimum falloff ',falloff1in
@@ -54,7 +56,7 @@ write(0,*) 'Degree interval ',degint
 write(0,*) 'Original azimuth degree',deg0
 end if
    
-!call MPI_BARRIER(MPI_COMM_WORLD, ierr)
+call MPI_BARRIER(MPI_COMM_WORLD, ierr)
       
 mu=vs**2*rho
 lam=vp**2*rho-2*mu
@@ -84,7 +86,9 @@ zz = 0.0
 normvector = 0.0
 if (myid==master) then
 write(0,*) 'Dimension check:'
-write(0,*) nx,ny,nz,dt,nt,ntt,df,nst,nfreq
+write(0,*) 'nx ny nz ',nx,ny,nz
+write(0,*) 'dt nt ntt ',dt,nt,ntt
+write(0,*) 'df nst nfreq ',df,nst,nfreq
 write(0,*) 'freq band tested is',(ifrq1-1)*df,'Hz - ',(ifrq2-1)*df,'Hz'
 end if
 !     set ihypo at domain center
@@ -138,7 +142,7 @@ call mpi_bcast(yy(1,1),size(yy),mpi_real,0,mpi_comm_world,ierr)
 call mpi_bcast(zz(1,1),size(zz),mpi_real,0,mpi_comm_world,ierr)
 !print *,myid,xx(10,10),yy(10,10),zz(10,10),normvector(:,1,1)
 call arrays
-!call MPI_BARRIER(MPI_COMM_WORLD, ierr)
+call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 end subroutine
 
 end module

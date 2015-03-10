@@ -19,8 +19,6 @@ stnum=l
 if(l+myid*intervsta > nst ) then
 stnum=stnum-1
 exit
-write(0,*) myid,stnum
-call mpi_barrier(mpi_comm_world,ierr)
 end if
 end do
 !!

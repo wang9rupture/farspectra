@@ -75,16 +75,24 @@ end subroutine
 subroutine compute_displacement
 use m_globals
 use mpi
-integer :: info,fh,offset
+integer :: info,fh
+integer(kind=mpi_offset_kind) :: offset
 !      peak=0.
 displacement = sqrt(sum(timeseries*timeseries,2))
-print *,maxval(timeseries(1,1,:,1))
-!call MPI_FILE_OPEN(MPI_COMM_WORLD,'timeseries',MPI_MODE_CREATE+MPI_MODE_WRONLY,mpi_info_null,fh,ierr)
-!offset = myid*stnum*2*3*ntt
-!call mpi_file_set_view(fh,offset*sizereal,mpi_real,mpi_real,"native",mpi_info_null,ierr)
-!call mpi_file_write(fh,timeseries(1,1,1,1),stnum*2*3*ntt,mpi_real,mpi_status_ignore,ierr)
-!call MPI_FILE_CLOSE(fh,ierr)
-!call MPI_BARRIER(MPI_COMM_WORLD, ierr)
+!print *,maxval(timeseries(1,1,:,1))
+call MPI_FILE_OPEN(MPI_COMM_WORLD,'out/timeseries',MPI_MODE_CREATE+MPI_MODE_WRONLY,mpi_info_null,fh,ierr)
+offset = myid*stnum*2*3*ntt
+call mpi_file_set_view(fh,offset*sizereal,mpi_real,mpi_real,"native",mpi_info_null,ierr)
+call mpi_file_write(fh,timeseries(1,1,1,1),stnum*2*3*ntt,mpi_real,mpi_status_ignore,ierr)
+call MPI_FILE_CLOSE(fh,ierr)
+call MPI_BARRIER(MPI_COMM_WORLD, ierr)
+
+call MPI_FILE_OPEN(MPI_COMM_WORLD,'out/displacement',MPI_MODE_CREATE+MPI_MODE_WRONLY,mpi_info_null,fh,ierr)
+offset = myid*stnum*2*ntt
+call mpi_file_set_view(fh,offset*sizereal,mpi_real,mpi_real,"native",mpi_info_null,ierr)
+call mpi_file_write(fh,displacement(1,1,1),stnum*2*ntt,mpi_real,mpi_status_ignore,ierr)
+call MPI_FILE_CLOSE(fh,ierr)
+call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 !      normalized
 !      if(displacement(nsta,nps,mntt).gt.peak) then
 !      peak=displacement(nsta,nps,mntt)
