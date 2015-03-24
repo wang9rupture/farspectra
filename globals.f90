@@ -85,7 +85,8 @@ real, allocatable, target, dimension(:,:) :: &
 	  
 double complex, allocatable, target, dimension(:) :: &
 	  in,  		&
-	  out	
+	  out,            &
+	  subarea	
 	  
 ! spectra portion
 real :: sig0, fcorn, falloffbest, fitrms

@@ -33,6 +33,7 @@ allocate ( &
 	afalloffbest(2,stnum),	&
 	afitrms(2,stnum),	&
 	fitspectrum(2,nfreq,stnum),&
+	subarea(stnum),         &
 	slrx(nx,ny),            &
 	slry(nx,ny),		&
 	slrz(nx,ny),		&
@@ -64,7 +65,10 @@ j = mod(l+intervsta*myid,floor(360/degint))
 k = (l+intervsta*myid-j)/floor(360/degint) + 1
 phi=deg0+(j-1)*degint
 theta=-90+(k-1)*degint
-
+if (theta+90 < ) then
+else
+subarea(l)=sin((theta+90)*d2r)*(degint*d2r)**2
+end if
 xyzstation(l,1)=origin(1)+dist*cos(theta*d2r)*cos(phi*d2r)
 xyzstation(l,2)=origin(2)-dist*sin(theta*d2r)
 xyzstation(l,3)=origin(3)+dist*cos(theta*d2r)*sin(phi*d2r)
