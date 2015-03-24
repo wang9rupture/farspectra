@@ -1,25 +1,10 @@
-GFORTRAN module version '10' created from parameters.f90
-MD5:51e7dce766dabc9c012465adf280c10f -- If you edit this, you'll get what you deserve.
-
-(() () () () () () () () () () () () () () () () () () () () () () ()
-() () () ())
-
-()
-
-()
-
-()
-
-()
-
-()
-
-(2 'm_parameters' 'm_parameters' '' 1 ((MODULE UNKNOWN-INTENT
-UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
-0 () () () 0 0)
-3 'read_parameters' 'm_parameters' '' 1 ((PROCEDURE UNKNOWN-INTENT
-MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0
-0 () () 0 () () () 0 0)
-)
-
-('m_parameters' 0 2 'read_parameters' 0 3)
+V27 0x3c m_parameters
+14 parameters.f90 S622 0
+03/24/2015  16:29:00
+enduse
+S 622 24 0 0 0 7 1 0 5031 10005 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 m_parameters
+S 623 23 5 0 0 0 624 622 5044 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 read_parameters
+S 624 14 5 0 0 0 1 623 5044 0 400000 A 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 6 0 622 0 0 0 0 read_parameters
+F 624 0
+Z
+Z

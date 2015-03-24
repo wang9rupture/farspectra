@@ -9,7 +9,7 @@ use m_util
 use mpi 
 integer,intent(in) :: it
 integer :: nsta,nc,n,inx,iny
-integer :: i,j,k,l
+integer :: i,j,k,l,ierr
 real  ::  delay,tmp
 real  ::  r(3),m0,gamma(3),xi(3),nv(3)
 real  ::   sliprate(3)
@@ -75,7 +75,7 @@ end subroutine
 subroutine compute_displacement
 use m_globals
 use mpi
-integer :: info,fh
+integer :: info,fh,ierr
 integer(kind=mpi_offset_kind) :: offset
 !      peak=0.
 displacement = sqrt(sum(timeseries*timeseries,2))
@@ -102,7 +102,7 @@ call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 !     $ mntt)/peak
 !      enddo
 	
-write(0,*) 'Calculation of Displacement Ends'
+!write(0,*) 'Calculation of Displacement Ends'
 end subroutine
 
 end module

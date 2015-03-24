@@ -1,25 +1,10 @@
-GFORTRAN module version '10' created from arrays.f90
-MD5:0cb95e10f40ca9258fd5209377d520ca -- If you edit this, you'll get what you deserve.
-
-(() () () () () () () () () () () () () () () () () () () () () () ()
-() () () ())
-
-()
-
-()
-
-()
-
-()
-
-()
-
-(2 'arrays' 'm_arrays' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
-UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () ()
-0 0)
-3 'm_arrays' 'm_arrays' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC
-UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0
-0)
-)
-
-('arrays' 0 2 'm_arrays' 0 3)
+V27 0x3c m_arrays
+10 arrays.f90 S622 0
+03/24/2015  16:28:59
+enduse
+S 622 24 0 0 0 7 1 0 5031 10005 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 m_arrays
+S 623 23 5 0 0 0 624 622 5040 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 arrays
+S 624 14 5 0 0 0 1 623 5040 0 400000 A 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 622 0 0 0 0 arrays
+F 624 0
+Z
+Z

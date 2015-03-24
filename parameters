@@ -12,6 +12,7 @@
 1            switch off for measure cornerfall
 1            ifrq1(index)
 2500          ifrq2(index)
+1            cfc
 -1            falloff1in
 5	     falloff2in
 1000000         distance

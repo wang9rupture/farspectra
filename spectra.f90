@@ -5,12 +5,11 @@ contains
 subroutine calculate_disspectrum
 use m_globals
 use m_FFTW3
-use mpi
 integer :: i,j,k,l,ind
 integer(kind=8) :: plan
 
 !     length of spectrum	  
-write(0,*) 'start to calculate spectrum'
+!write(0,*) 'start to calculate spectrum'
 !	  ind=1
 do k=1,stnum
 	do i=1,2
@@ -38,8 +37,8 @@ subroutine getcorn2
 !! provided by Peter Shearer, but not well constrained
 use m_globals
 real,allocatable,dimension(:) :: resid
-real, parameter :: dfall=0.01   !falloff interval
-real, parameter :: fc1=0.001,fc2=5,dfc=0.001,cfc=0.5!corner freq range
+real, parameter :: dfall=0.1   !falloff interval
+real, parameter :: fc1=0.01,fc2=5,dfc=0.01!corner freq range
 real :: falloff1,falloff2,falloff
 integer :: nfall,ifall,i
 real :: f1,f2,fc,f
@@ -77,7 +76,11 @@ end if
             if (falloff1in > 0.) then
                weight = 1.
             else
-               weight = 1./max(f,cfc)
+               if(f<cfc) then
+ 	       weight = 1
+	       else 
+               weight = cfc/f
+	       end if
             end if
    		
             resid(i)=spec(i)-pred
@@ -125,8 +128,8 @@ subroutine getcorn
 !! Modified based upon getcorn2 given by Peter Shearer
 use m_globals
 real,allocatable,dimension(:) :: resid
-real, parameter :: dfall=0.01   !falloff interval
-real, parameter :: fc1=0.001,fc2=5,dfc=0.001,cfc=0.5 !corner freq range
+real, parameter :: dfall=0.1   !falloff interval
+real, parameter :: fc1=0.01,fc2=5,dfc=0.01 !corner freq range
 real :: falloff1,falloff2,falloff
 integer :: nfall,ifall,i
 real :: f1,f2,fc,f
@@ -166,7 +169,11 @@ end if
             if (falloff1in > 0.) then
                weight = 1.
             else
-               weight = 1./max(f,cfc)
+               if(f<cfc) then
+               weight = 1
+               else 
+               weight = cfc/f
+               end if
             end if
    		
             resid(i)=spec(i)-pred
@@ -198,7 +205,7 @@ end subroutine
 subroutine calculate_discornfall
 use m_globals
 use mpi
-integer :: i,j,k,l,ind
+integer :: i,j,k,l,ind,ierr
 integer :: info,fh
 integer(kind=mpi_offset_kind) :: offset
 do j=1,stnum
@@ -213,7 +220,7 @@ call  getcorn
 else
 call  getcorn2
 end if
-print *,myid,sig0,fcorn,falloffbest,fitrms,specfit(1)
+!print *,myid,sig0,fcorn,falloffbest,fitrms,specfit(1)
 !(optionally call getcorn)
 asig0(i,j)=sig0
 afcorn(i,j)=fcorn

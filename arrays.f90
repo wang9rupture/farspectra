@@ -4,7 +4,6 @@ contains
 
 subroutine arrays
 use m_globals
-use mpi
 integer :: l,k,j
 real :: theta, phi
 !print *,myid,'of',numprocs
@@ -37,7 +36,8 @@ allocate ( &
 	slrx(nx,ny),            &
 	slry(nx,ny),		&
 	slrz(nx,ny),		&
-	vrup(nx,3),             &
+	trup(nx,ny),             &
+	area(nx,ny),            &
 	in(ntt),			&
 	out(ntt),			&
 	spec(nfreq),		&
@@ -49,7 +49,8 @@ xyzstation = 0.0
 slrx = 0.0
 slry = 0.0
 slrz = 0.0
-vrup = 0.0
+trup = 0.0
+area = 0.0
 disspectrum = 0.0
 
       

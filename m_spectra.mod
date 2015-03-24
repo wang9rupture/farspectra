@@ -1,38 +1,22 @@
-GFORTRAN module version '10' created from spectra.f90
-MD5:8e106ab6043415aa3a4a12c3d9beefd0 -- If you edit this, you'll get what you deserve.
-
-(() () () () () () () () () () () () () () () () () () () () () () ()
-() () () ())
-
-()
-
-()
-
-()
-
-()
-
-()
-
-(2 'calculate_discornfall' 'm_spectra' '' 1 ((PROCEDURE UNKNOWN-INTENT
-MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0
-0 () () 0 () () () 0 0)
-3 'calculate_disspectrum' 'm_spectra' '' 1 ((PROCEDURE UNKNOWN-INTENT
-MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0
-0 () () 0 () () () 0 0)
-4 'getcorn' 'm_spectra' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
-UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () ()
-0 0)
-5 'getcorn2' 'm_spectra' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
-DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 ()
-() () 0 0)
-6 'm_spectra' 'm_spectra' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC
-UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0
-0)
-7 'read_disspectrum' 'm_spectra' '' 1 ((PROCEDURE UNKNOWN-INTENT
-MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE IMPLICIT_PURE) (UNKNOWN 0 0 0 0
-UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-)
-
-('calculate_discornfall' 0 2 'calculate_disspectrum' 0 3 'getcorn' 0 4
-'getcorn2' 0 5 'm_spectra' 0 6 'read_disspectrum' 0 7)
+V27 0x3c m_spectra
+11 spectra.f90 S622 0
+03/24/2015  16:29:02
+enduse
+S 622 24 0 0 0 7 1 0 5031 10005 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 m_spectra
+S 623 23 5 0 0 0 624 622 5041 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 calculate_disspectrum
+S 624 14 5 0 0 0 1 623 5041 0 400000 A 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 622 0 0 0 0 calculate_disspectrum
+F 624 0
+S 625 23 5 0 0 0 626 622 5063 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 read_disspectrum
+S 626 14 5 0 0 0 1 625 5063 0 400000 A 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 28 0 622 0 0 0 0 read_disspectrum
+F 626 0
+S 627 23 5 0 0 0 628 622 5080 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 getcorn2
+S 628 14 5 0 0 0 1 627 5080 0 400000 A 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 36 0 622 0 0 0 0 getcorn2
+F 628 0
+S 629 23 5 0 0 0 630 622 5089 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 getcorn
+S 630 14 5 0 0 0 1 629 5089 0 400000 A 0 0 0 0 0 0 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0 622 0 0 0 0 getcorn
+F 630 0
+S 631 23 5 0 0 0 632 622 5097 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 calculate_discornfall
+S 632 14 5 0 0 0 1 631 5097 0 400000 A 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 205 0 622 0 0 0 0 calculate_discornfall
+F 632 0
+Z
+Z

@@ -3,10 +3,11 @@ use m_globals
 use m_parameters
 use m_timeseries
 use m_spectra
+use m_util
 use mpi
 implicit none
 
-integer :: it
+integer :: it,ierr,rc
 
 !! mpi initiation
  call MPI_INIT( ierr )
@@ -36,7 +37,7 @@ end do
 if(myid == master) then    
 close(29)
 close(30)
-close(31)
+close(31) 
 write(0,*) ''
 write(0,*) 'Calculation of Waveforms Ends'
 write(0,*) ''
@@ -50,4 +51,5 @@ call read_disspectrum
 end if
 call calculate_discornfall
 call MPI_FINALIZE(rc)
+if(myid == master) call rupradius
 end program

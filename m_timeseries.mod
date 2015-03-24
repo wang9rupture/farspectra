@@ -1,30 +1,14 @@
-GFORTRAN module version '10' created from timeseries.f90
-MD5:81d144fda401b885ef0efd7e4eb1d5bc -- If you edit this, you'll get what you deserve.
-
-(() () () () () () () () () () () () () () () () () () () () () () ()
-() () () ())
-
-()
-
-()
-
-()
-
-()
-
-()
-
-(2 'compute_displacement' 'm_timeseries' '' 1 ((PROCEDURE UNKNOWN-INTENT
-MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0
-0 () () 0 () () () 0 0)
-3 'compute_timeseries' 'm_timeseries' '' 1 ((PROCEDURE UNKNOWN-INTENT
-MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 4
-0 (5) () 0 () () () 0 0)
-6 'm_timeseries' 'm_timeseries' '' 1 ((MODULE UNKNOWN-INTENT
-UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () ()
-0 () () () 0 0)
-5 'it' '' '' 4 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 DUMMY) (
-INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-)
-
-('compute_displacement' 0 2 'compute_timeseries' 0 3 'm_timeseries' 0 6)
+V27 0x3c m_timeseries
+14 timeseries.f90 S622 0
+03/24/2015  16:29:01
+enduse
+S 622 24 0 0 0 7 1 0 5031 10005 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 m_timeseries
+S 623 23 5 0 0 0 625 622 5044 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 compute_timeseries
+S 624 1 3 1 0 7 1 623 5063 4 3000 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 it
+S 625 14 5 0 0 0 1 623 5044 0 400000 A 0 0 0 0 0 0 0 2 1 0 0 0 0 0 0 0 0 0 0 0 0 6 0 622 0 0 0 0 compute_timeseries
+F 625 1 624
+S 626 23 5 0 0 0 627 622 5066 0 0 A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 compute_displacement
+S 627 14 5 0 0 0 1 626 5066 0 400000 A 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 75 0 622 0 0 0 0 compute_displacement
+F 627 0
+Z
+Z

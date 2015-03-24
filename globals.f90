@@ -44,7 +44,8 @@ real :: &
         deg0,     &
         ifrq1f,   &
         ifrq2f,   &
-        getfc
+        getfc,    &
+        cfc
         
         
 integer :: &
@@ -60,7 +61,7 @@ integer :: &
 	  soff 
 
 integer :: &
-	  myid, numprocs, ierr, rc, intervsta, stnum
+	  myid, numprocs, intervsta, stnum
 	  
 	  
 real, allocatable, target, dimension(:,:,:,:) :: &
@@ -79,7 +80,8 @@ real, allocatable, target, dimension(:,:) :: &
 	  slrx,           &
 	  slry,           &
 	  slrz,           &
-	  vrup
+	  area,           &
+	  trup
 	  
 double complex, allocatable, target, dimension(:) :: &
 	  in,  		&

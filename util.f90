@@ -52,6 +52,23 @@ coefs=coefs-cjkpq(j,k,p,q)*(gamma(i)*gamma(p)- &
 end do
 end do
 end do
-end function      
+end function  
 
+subroutine rupradius    
+use m_globals
+integer :: i,j
+real,allocatable,dimension(:,:) :: ruparea
+
+allocate(ruparea(nx,ny))
+ruparea = 0.0
+
+open(101,file='in/trup',recl=nx*ny*4,access='direct')
+read(101,rec=1) ((trup(i,j),i=1,nx),j=1,ny)
+close(101)
+
+where(trup < 1e8 .and. trup > 0) 
+ruparea = area
+end where
+write(0,*) 'Rupture Radius = ', sqrt(sum(ruparea)/pi),' m'
+end subroutine 
 end module

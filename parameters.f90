@@ -7,7 +7,7 @@ subroutine read_parameters
 use m_globals
 use m_arrays
 use mpi
-integer :: j,l
+integer :: j,l,ierr
 open( 22, file='parameters', status='old' )
 
 read(22,*) lx
@@ -25,6 +25,7 @@ read(22,*) soff
 read(22,*) getfc
 read(22,*) ifrq1f
 read(22,*) ifrq2f
+read(22,*) cfc
 read(22,*) falloff1in
 read(22,*) falloff2in
 read(22,*) dist
@@ -49,7 +50,8 @@ write(0,*) 'Only measure spect switch 1-no 2-yes ',soff
 write(0,*) 'Use getcorn or getcorn2 to measure fc', getfc
 write(0,*) 'Minimum freq Hz ',ifrq1f
 write(0,*) 'Maximum freq Hz ',ifrq2f
-write(0,*) 'Minimum falloff ',falloff1in
+write(0,*) 'weight frequency Hz',cfc
+write(0,*) 'Minimum falloff ',abs(falloff1in)
 write(0,*) 'Maximum falloff ',falloff2in
 write(0,*) 'Distance meter ',dist
 write(0,*) 'Degree interval ',degint
@@ -142,6 +144,7 @@ call mpi_bcast(yy(1,1),size(yy),mpi_real,0,mpi_comm_world,ierr)
 call mpi_bcast(zz(1,1),size(zz),mpi_real,0,mpi_comm_world,ierr)
 !print *,myid,xx(10,10),yy(10,10),zz(10,10),normvector(:,1,1)
 call arrays
+area=sqrt(sum(normvector*normvector, 1))
 call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 end subroutine
 
