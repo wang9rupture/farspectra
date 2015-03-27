@@ -74,18 +74,34 @@ end subroutine
 
 subroutine compute_displacement
 use m_globals
+use m_util
 use mpi
-integer :: info,fh,ierr
+integer :: info,fh,ierr,i,j
 integer(kind=mpi_offset_kind) :: offset
+real,dimension(ntt) :: array
 !      peak=0.
+energy = 0.0
+array = 0.0
 displacement = sqrt(sum(timeseries*timeseries,2))
+
+do j=1,stnum
+       call differ(displacement(1,:,j),array)
+       energy(1) = energy(1) + subarea(j)*sum(array*array)/dt*vp*rho
+       call differ(displacement(2,:,j),array)
+       energy(2) = energy(2) + subarea(j)*sum(array*array)/dt*vs*rho
+!       write(0,*) 'energy',myid,j,energy
+end do
+
+
+!output time series records if necessary
+
 !print *,maxval(timeseries(1,1,:,1))
-call MPI_FILE_OPEN(MPI_COMM_WORLD,'out/timeseries',MPI_MODE_CREATE+MPI_MODE_WRONLY,mpi_info_null,fh,ierr)
-offset = myid*stnum*2*3*ntt
-call mpi_file_set_view(fh,offset*sizereal,mpi_real,mpi_real,"native",mpi_info_null,ierr)
-call mpi_file_write(fh,timeseries(1,1,1,1),stnum*2*3*ntt,mpi_real,mpi_status_ignore,ierr)
-call MPI_FILE_CLOSE(fh,ierr)
-call MPI_BARRIER(MPI_COMM_WORLD, ierr)
+!call MPI_FILE_OPEN(MPI_COMM_WORLD,'out/timeseries',MPI_MODE_CREATE+MPI_MODE_WRONLY,mpi_info_null,fh,ierr)
+!offset = myid*stnum*2*3*ntt
+!call mpi_file_set_view(fh,offset*sizereal,mpi_real,mpi_real,"native",mpi_info_null,ierr)
+!call mpi_file_write(fh,timeseries(1,1,1,1),stnum*2*3*ntt,mpi_real,mpi_status_ignore,ierr)
+!call MPI_FILE_CLOSE(fh,ierr)
+!call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 
 call MPI_FILE_OPEN(MPI_COMM_WORLD,'out/displacement',MPI_MODE_CREATE+MPI_MODE_WRONLY,mpi_info_null,fh,ierr)
 offset = myid*stnum*2*ntt

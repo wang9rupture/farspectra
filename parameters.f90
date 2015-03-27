@@ -31,6 +31,7 @@ read(22,*) falloff2in
 read(22,*) dist
 read(22,*) degint
 read(22,*) deg0
+read(22,*) rref
 
 
 close(22)
@@ -56,6 +57,8 @@ write(0,*) 'Maximum falloff ',falloff2in
 write(0,*) 'Distance meter ',dist
 write(0,*) 'Degree interval ',degint
 write(0,*) 'Original azimuth degree',deg0
+write(0,*) 'Set rupture radius m', rref
+write(0,*) ''
 end if
    
 call MPI_BARRIER(MPI_COMM_WORLD, ierr)
@@ -101,42 +104,43 @@ ihypo(3)=(nz)/2
 !! root node reading files
 if (myid == master) then
 !     reading in slip coordinate function
-open(26,file='in/xx',access='direct', &
+  open(26,file='in/xx',access='direct', &
     recl=nx*ny*sizereal)
-open(27,file='in/yy',access='direct', &
+  open(27,file='in/yy',access='direct', &
     recl=nx*ny*sizereal)
-open(28,file='in/zz',access='direct', &
+  open(28,file='in/zz',access='direct', &
     recl=nx*ny*sizereal)
 	  
-read(26,rec=ihypo(3)) ((xx(j,l),j=1,nx),l=1,ny)
-read(27,rec=ihypo(3)) ((yy(j,l),j=1,nx),l=1,ny)
-read(28,rec=ihypo(3)) ((zz(j,l),j=1,nx),l=1,ny)
+  read(26,rec=ihypo(3)) ((xx(j,l),j=1,nx),l=1,ny)
+  read(27,rec=ihypo(3)) ((yy(j,l),j=1,nx),l=1,ny)
+  read(28,rec=ihypo(3)) ((zz(j,l),j=1,nx),l=1,ny)
       
-close(26)
-close(27)
-close(28)
+  close(26)
+  close(27)
+  close(28)
 
 !     compute origin coordinate
-      origin(1)=xx(ihypo(1),ihypo(2))
-      origin(2)=yy(ihypo(1),ihypo(2))
-      origin(3)=zz(ihypo(1),ihypo(2))
+  origin(1)=xx(ihypo(1),ihypo(2))
+  origin(2)=yy(ihypo(1),ihypo(2))
+  origin(3)=zz(ihypo(1),ihypo(2))
 
 !  read normal vector( magnitude is area)   
-open(66,file='in/n_x',access='direct', &
+  open(66,file='in/n_x',access='direct', &
 	recl=nx*ny*sizereal)
-read(66,rec=1) ((normvector(1,j,l),j=1,nx),l=1,ny)
-close(66)
+  read(66,rec=1) ((normvector(1,j,l),j=1,nx),l=1,ny)
+  close(66)
       
-open(67,file='in/n_y',access='direct', &
+  open(67,file='in/n_y',access='direct', &
       recl=nx*ny*sizereal)
-read(67,rec=1) ((normvector(2,j,l),j=1,nx),l=1,ny)
-close(67)
+  read(67,rec=1) ((normvector(2,j,l),j=1,nx),l=1,ny)
+  close(67)
       
-open(68,file='in/n_z',access='direct', &
+  open(68,file='in/n_z',access='direct', &
       recl=nx*ny*sizereal)
-read(68,rec=1) ((normvector(3,j,l),j=1,nx),l=1,ny)
-close(68)
+  read(68,rec=1) ((normvector(3,j,l),j=1,nx),l=1,ny)
+  close(68)
 end if
+
 call MPI_BCAST(origin(1),size(origin),MPI_REAL,0,MPI_COMM_WORLD,ierr)
 call MPI_BCAST(normvector(1,1,1),size(normvector),MPI_REAL,0,MPI_COMM_WORLD,ierr)
 call mpi_bcast(xx(1,1),size(xx),mpi_real,0,mpi_comm_world,ierr)

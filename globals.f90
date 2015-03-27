@@ -44,7 +44,6 @@ real :: &
         deg0,     &
         ifrq1f,   &
         ifrq2f,   &
-        getfc,    &
         cfc
         
         
@@ -58,6 +57,7 @@ integer :: &
 	  nfreq,	&
 	  ifrq1,	&
 	  ifrq2,	&
+	  getfc,    &
 	  soff 
 
 integer :: &
@@ -83,15 +83,22 @@ real, allocatable, target, dimension(:,:) :: &
 	  area,           &
 	  trup
 	  
+real, allocatable, target, dimension(:) :: &
+        subarea
+	  
 double complex, allocatable, target, dimension(:) :: &
 	  in,  		&
-	  out,            &
-	  subarea	
-	  
+	  out	
+real :: radius, rref !(rref set in simulation; radius is measured from trup)
 ! spectra portion
 real :: sig0, fcorn, falloffbest, fitrms
 real,allocatable,dimension(:,:) :: &
 	asig0, afcorn, afalloffbest, afitrms
+real,dimension(2) :: safc,safr,samo, energy!per processor, for reduction
+! spherical average corner freq, fall-off rate, spectral level(moment),energy
+real,dimension(2) :: safc0,safr0,samo0,energy0 ! for receiving reduce result in master node
+real :: saar,saar0
+! spherical area(discrete)
 real,allocatable,dimension(:,:,:) :: &
       fitspectrum
 

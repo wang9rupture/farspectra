@@ -69,6 +69,18 @@ close(101)
 where(trup < 1e8 .and. trup > 0) 
 ruparea = area
 end where
-write(0,*) 'Rupture Radius = ', sqrt(sum(ruparea)/pi),' m'
+radius = sqrt(sum(ruparea)/pi)
+write(0,*) 'Rupture Radius = ', radius ,' m'
 end subroutine 
+
+subroutine differ(intmsers,outmsers)
+real,intent(in) :: intmsers(:)
+real,dimension(size(intmsers)),intent(out):: outmsers
+integer :: n,i
+n=size(intmsers)
+Loop: do i=1,n-1
+outmsers(i)=intmsers(i+1)-intmsers(i)
+end do Loop
+outmsers(n)=outmsers(n-1)
+end subroutine
 end module

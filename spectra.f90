@@ -76,12 +76,22 @@ end if
             if (falloff1in > 0.) then
                weight = 1.
             else
-               if(f<cfc) then
- 	       weight = 1
-	       else 
-               weight = cfc/f
-	       end if
-            end if
+!inversely dependent on frequency  
+               if (cfc < 0) then          
+                 if((f-0.)<1e-8) then
+                   weight = 0.
+                 else	          
+                   weight = 1/f
+                 end if
+! modified flat weight at low frequency
+               else               
+                 if(f<cfc) then
+                   weight = 1
+                 else 
+                   weight = cfc/f
+                 end if
+               end if               
+            end if         
    		
             resid(i)=spec(i)-pred
             sum=sum+resid(i)*weight
@@ -96,7 +106,21 @@ end if
             if (falloff1in > 0.) then
                weight = 1.
             else
-               weight = 1./max(f,cfc)
+!inversely dependent on frequency  
+               if (cfc < 0) then          
+                 if((f-0.)<1e-8) then
+                   weight = 0.
+                 else	          
+                   weight = 1/f
+                 end if
+! modified flat weight at low frequency
+               else               
+                 if(f<cfc) then
+                   weight = 1
+                 else 
+                   weight = cfc/f
+                 end if
+               end if               
             end if         
          
             resid(i) = resid(i) - sig
@@ -169,10 +193,20 @@ end if
             if (falloff1in > 0.) then
                weight = 1.
             else
-               if(f<cfc) then
-               weight = 1
-               else 
-               weight = cfc/f
+!inversely dependent on frequency  
+               if (cfc < 0) then
+                 if((f-0.)<1e-8) then
+                   weight = 0.
+                 else	          
+                   weight = 1/f
+                 end if
+! modified flat weight at low frequency
+               else               
+                 if(f<cfc) then
+                   weight = 1
+                 else 
+                   weight = cfc/f
+                 end if
                end if
             end if
    		
@@ -208,6 +242,9 @@ use mpi
 integer :: i,j,k,l,ind,ierr
 integer :: info,fh
 integer(kind=mpi_offset_kind) :: offset
+safc = 0.0
+safr = 0.0
+samo = 0.0
 do j=1,stnum
 do i=1,2
 spec = 0
@@ -220,13 +257,18 @@ call  getcorn
 else
 call  getcorn2
 end if
-!print *,myid,sig0,fcorn,falloffbest,fitrms,specfit(1)
+print *,myid,sig0,fcorn,falloffbest,fitrms,specfit(1)
 !(optionally call getcorn)
 asig0(i,j)=sig0
 afcorn(i,j)=fcorn
 afalloffbest(i,j)=falloffbest
 afitrms(i,j)=fitrms
-fitspectrum(i,1:nfreq,j)=specfit(1:nfreq)		  
+fitspectrum(i,1:nfreq,j)=specfit(1:nfreq)	
+!weighted fc
+!write(0,*) 'fc',myid,subarea(j),fcorn,falloffbest
+safc(i)=safc(i)+subarea(j)*fcorn
+safr(i)=safr(i)+subarea(j)*falloffbest
+samo(i)=samo(i)+subarea(j)*10**sig0	  
 end do
 end do 
 
