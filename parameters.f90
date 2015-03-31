@@ -7,8 +7,8 @@ subroutine read_parameters
 use m_globals
 use m_arrays
 use mpi
-integer :: j,l,ierr
-open( 22, file='parameters', status='old' )
+integer :: j,l,k,ierr
+open( 22, file='parameters', status='old',iostat = k)
 
 read(22,*) lx
 read(22,*) ly
@@ -105,11 +105,11 @@ ihypo(3)=(nz)/2
 if (myid == master) then
 !     reading in slip coordinate function
   open(26,file='in/xx',access='direct', &
-    recl=nx*ny*sizereal)
+    recl=nx*ny*sizereal,form='unformatted',status='old')
   open(27,file='in/yy',access='direct', &
-    recl=nx*ny*sizereal)
+    recl=nx*ny*sizereal,form='unformatted',status='old')
   open(28,file='in/zz',access='direct', &
-    recl=nx*ny*sizereal)
+    recl=nx*ny*sizereal,form='unformatted',status='old')
 	  
   read(26,rec=ihypo(3)) ((xx(j,l),j=1,nx),l=1,ny)
   read(27,rec=ihypo(3)) ((yy(j,l),j=1,nx),l=1,ny)
@@ -126,17 +126,17 @@ if (myid == master) then
 
 !  read normal vector( magnitude is area)   
   open(66,file='in/n_x',access='direct', &
-	recl=nx*ny*sizereal)
+	recl=nx*ny*sizereal,form='unformatted',status='old')
   read(66,rec=1) ((normvector(1,j,l),j=1,nx),l=1,ny)
   close(66)
       
   open(67,file='in/n_y',access='direct', &
-      recl=nx*ny*sizereal)
+      recl=nx*ny*sizereal,form='unformatted',status='old')
   read(67,rec=1) ((normvector(2,j,l),j=1,nx),l=1,ny)
   close(67)
       
   open(68,file='in/n_z',access='direct', &
-      recl=nx*ny*sizereal)
+      recl=nx*ny*sizereal,form='unformatted',status='old')
   read(68,rec=1) ((normvector(3,j,l),j=1,nx),l=1,ny)
   close(68)
 end if

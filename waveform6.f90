@@ -25,11 +25,11 @@ if(soff == 1) then
   call rupradius
 
   open(29,file='in/slipr_x',access='direct', &
-     recl=nx*ny*sizereal,status='old')
+     recl=nx*ny*sizereal,form='unformatted',status='old')
   open(30,file='in/slipr_y',access='direct', &
-     recl=nx*ny*sizereal,status='old')
+     recl=nx*ny*sizereal,form='unformatted',status='old')
   open(31,file='in/slipr_z',access='direct', &
-     recl=nx*ny*sizereal,status='old')
+     recl=nx*ny*sizereal,form='unformatted',status='old')
   end if
   do it=1,nt
       call compute_timeseries(it)

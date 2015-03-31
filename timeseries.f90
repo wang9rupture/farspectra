@@ -81,10 +81,10 @@ integer(kind=mpi_offset_kind) :: offset
 real,dimension(ntt) :: array
 !      peak=0.
 energy = 0.0
-array = 0.0
 displacement = sqrt(sum(timeseries*timeseries,2))
 
 do j=1,stnum
+       array = 0.0
        call differ(displacement(1,:,j),array)
        energy(1) = energy(1) + subarea(j)*sum(array*array)/dt*vp*rho
        call differ(displacement(2,:,j),array)

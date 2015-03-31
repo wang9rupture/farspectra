@@ -13,10 +13,10 @@
 #parameters.f90 timeseries.f90 spectra.f90 waveform5.f90  -O3 -lfftw3 -lm -o ../example/waveform
 
 #local laptop
-#mpif90 -I/usr/local/include -fcheck=all -fcheck=bounds  fftw.f90 globals.f90  arrays.f90 util.f90 \
-#parameters.f90 timeseries.f90 spectra.f90 stats.f90 waveform6.f90  -O3 -lfftw3 -lm -o ../example/waveform-m0
+mpif90 -I/usr/local/include -fcheck=all -fcheck=bounds  fftw.f90 globals.f90  arrays.f90 util.f90 \
+parameters.f90 timeseries.f90 spectra.f90 stats.f90 waveform6.f90  -O3 -lfftw3 -lm -o ../example/waveform-m0
 
 #cusco
-mpif90   fftw.f90 globals.f90  arrays.f90 util.f90 \
-parameters.f90 timeseries.f90 spectra.f90 stats.f90 waveform6.f90  -O3 -I/export/home/wang/local/fftwgnu/include \
- -L/export/home/wang/local/fftwgnu/lib -lfftw3 -lm -o ../example/waveform-m0
+#mpif90   fftw.f90 globals.f90  arrays.f90 util.f90 \
+#parameters.f90 timeseries.f90 spectra.f90 stats.f90 waveform6.f90  -O3 -I/export/home/wang/local/fftwgnu/include \
+# -L/export/home/wang/local/fftwgnu/lib -lfftw3 -lm -o ../example/waveform-m0

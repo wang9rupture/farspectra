@@ -77,9 +77,9 @@ do l=1,stnum
   phi=deg0+(j-1)*degint
   theta=-90+(k-1)*degint
   if (abs(theta+90) < 1e-4 .or. abs(theta-90) < 1e-4) then
-    subarea(l) = 0.25*sin((degint)*d2r/2.0)*(degint*d2r)**2
+    subarea(l) = dist**2*0.25*sin((degint)*d2r/2.0)*(degint*d2r)**2
   else
-    subarea(l)=sin((theta+90)*d2r)*(degint*d2r)**2
+    subarea(l)=dist**2*sin((theta+90)*d2r)*(degint*d2r)**2
   end if
   write(0,*) myid,phi,theta,subarea(l)
   saar = saar + subarea(l)
