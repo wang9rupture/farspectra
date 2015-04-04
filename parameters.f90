@@ -25,6 +25,8 @@ read(22,*) soff
 read(22,*) getfc
 read(22,*) ifrq1f
 read(22,*) ifrq2f
+read(22,*) fc1
+read(22,*) fc2
 read(22,*) cfc
 read(22,*) falloff1in
 read(22,*) falloff2in
@@ -51,6 +53,8 @@ write(0,*) 'Only measure spect switch 1-no 2-yes ',soff
 write(0,*) 'Use getcorn or getcorn2 to measure fc', getfc
 write(0,*) 'Minimum freq Hz ',ifrq1f
 write(0,*) 'Maximum freq Hz ',ifrq2f
+write(0,*) 'Min fc',fc1
+write(0,*) 'Max fc',fc2
 write(0,*) 'weight frequency Hz',cfc
 write(0,*) 'Minimum falloff ',abs(falloff1in)
 write(0,*) 'Maximum falloff ',falloff2in

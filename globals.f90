@@ -44,7 +44,9 @@ real :: &
         deg0,     &
         ifrq1f,   &
         ifrq2f,   &
-        cfc
+        cfc,      &
+        fc1,      &
+        fc2
         
         
 integer :: &
@@ -65,10 +67,11 @@ integer :: &
 	  
 	  
 real, allocatable, target, dimension(:,:,:,:) :: &
-	  timeseries
+	  timeseries    
 	  
 real, allocatable, target, dimension(:,:,:) :: &
    	  displacement,	&
+   	  tmp_disp,       &
    	  disspectrum,	&
    	  normvector
    	  
@@ -94,10 +97,17 @@ real :: radius, rref !(rref set in simulation; radius is measured from trup)
 real :: sig0, fcorn, falloffbest, fitrms
 real,allocatable,dimension(:,:) :: &
 	asig0, afcorn, afalloffbest, afitrms
-real,dimension(2) :: safc,safr,samo, energy!per processor, for reduction
+real,dimension(2) :: safc,safr,samo, energy,tmp_energy!per processor, for reduction
 ! spherical average corner freq, fall-off rate, spectral level(moment),energy
-real,dimension(2) :: safc0,safr0,samo0,energy0 ! for receiving reduce result in master node
+real,dimension(2) :: safc0,safr0,samo0,energy0,tmp_energy0 ! for receiving reduce result in master node
 real :: saar,saar0
+
+
+!tmp code
+real,allocatable,dimension(:,:) :: radptn
+
+
+
 ! spherical area(discrete)
 real,allocatable,dimension(:,:,:) :: &
       fitspectrum

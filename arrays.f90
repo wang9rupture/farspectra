@@ -30,6 +30,7 @@ call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 allocate ( &
 	timeseries(2,3,ntt,stnum),   &
 	displacement(2,ntt,stnum),   &
+	tmp_disp(2,ntt,stnum),       &
 	disspectrum(2,nfreq,stnum), &
 	xyzstation(stnum,3),	   &	
 	asig0(2,stnum),      &
@@ -38,6 +39,8 @@ allocate ( &
 	afitrms(2,stnum),	&
 	fitspectrum(2,nfreq,stnum),&
 	subarea(stnum),         &
+	radptn(2,stnum),        & !1 is p wave
+	                          !2 is s wave 
 	slrx(nx,ny),            &
 	slry(nx,ny),		&
 	slrz(nx,ny),		&
@@ -81,14 +84,18 @@ do l=1,stnum
   else
     subarea(l)=dist**2*sin((theta)*d2r)*(degint*d2r)**2
   end if
-  write(0,*) myid,phi,theta,subarea(l)
+  
   saar = saar + subarea(l)
-
+  
+  radptn(1,l) = abs(sin(2*theta*d2r)*cos(phi*d2r))
+  radptn(2,l) = sqrt((cos(2*theta*d2r)*cos(phi*d2r))**2 + &
+                (cos(theta*d2r)*sin(phi*d2r))**2)
+!  write(0,*) myid,phi,theta,subarea(l),radptn(:,l)
   xyzstation(l,1)=origin(1)+dist*sin(theta*d2r)*cos(phi*d2r)
   xyzstation(l,2)=origin(2)+dist*sin(theta*d2r)*sin(phi*d2r)
   xyzstation(l,3)=origin(3)+dist*cos(theta*d2r)
 end do
-write(0,*) 'saar:',myid,saar
+
 end subroutine
 
 end module

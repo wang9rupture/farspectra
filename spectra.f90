@@ -38,7 +38,7 @@ subroutine getcorn2
 use m_globals
 real,allocatable,dimension(:) :: resid
 real, parameter :: dfall=0.1   !falloff interval
-real, parameter :: fc1=0.01,fc2=5,dfc=0.01!corner freq range
+real, parameter :: dfc=0.01!corner freq range
 real :: falloff1,falloff2,falloff
 integer :: nfall,ifall,i
 real :: f1,f2,fc,f
@@ -153,7 +153,7 @@ subroutine getcorn
 use m_globals
 real,allocatable,dimension(:) :: resid
 real, parameter :: dfall=0.1   !falloff interval
-real, parameter :: fc1=0.01,fc2=5,dfc=0.01 !corner freq range
+real, parameter :: dfc=0.01 !corner freq range
 real :: falloff1,falloff2,falloff
 integer :: nfall,ifall,i
 real :: f1,f2,fc,f

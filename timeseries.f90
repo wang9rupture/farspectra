@@ -28,7 +28,16 @@ do nsta=1,stnum
 !if (mod(it-1,500)==0) print *,myid,xyzstation(nsta,:)
 !     compute each station	
 !write(0,*) 'staion is ',xyzstation(nsta,1),xyzstation(nsta,2) &
-!      ,xyzstation(nsta,3)  
+!      ,xyzstation(nsta,3) 
+!!!!!!!!!!!!!!!!
+delay=dist/vp 
+tmp_disp(1,it+floor(delay/dt),nsta) = tmp_disp(1,it+floor(delay/dt),nsta) + &
+radptn(1,nsta)*mu/(4*pi*rho*vp**3*dist)*sum(slrx*area)
+delay=dist/vs 
+tmp_disp(2,it+floor(delay/dt),nsta) = tmp_disp(2,it+floor(delay/dt),nsta) + &
+radptn(2,nsta)*mu/(4*pi*rho*vs**3*dist)*sum(slrx*area)
+
+!!!!!!!!!!!!!!!! 
 do nc=1,3
 !     compute each component x-y-z
 do iny=1,ny
@@ -82,14 +91,23 @@ real,dimension(ntt) :: array
 !      peak=0.
 energy = 0.0
 displacement = sqrt(sum(timeseries*timeseries,2))
-
+tmp_energy = 0.0
 do j=1,stnum
        array = 0.0
        call differ(displacement(1,:,j),array)
        energy(1) = energy(1) + subarea(j)*sum(array*array)/dt*vp*rho
+       array = 0.0
        call differ(displacement(2,:,j),array)
        energy(2) = energy(2) + subarea(j)*sum(array*array)/dt*vs*rho
-!       write(0,*) 'energy',myid,j,energy
+       !!!!!!!!!!!!!
+       array = 0.0
+       call differ(tmp_disp(1,:,j),array)
+       tmp_energy(1) = tmp_energy(1) + subarea(j)*sum(array*array)/dt*vp*rho
+       array = 0.0
+       call differ(tmp_disp(2,:,j),array)
+       tmp_energy(2) = tmp_energy(2) + subarea(j)*sum(array*array)/dt*vs*rho       
+       !!!!!!!!!!!!!
+!       write(0,*) 'energy',myid,j,tmp_energy
 end do
 
 
@@ -109,6 +127,16 @@ call mpi_file_set_view(fh,offset*sizereal,mpi_real,mpi_real,"native",mpi_info_nu
 call mpi_file_write(fh,displacement(1,1,1),stnum*2*ntt,mpi_real,mpi_status_ignore,ierr)
 call MPI_FILE_CLOSE(fh,ierr)
 call MPI_BARRIER(MPI_COMM_WORLD, ierr)
+
+!!!!!!!!!!!!!!
+call MPI_FILE_OPEN(MPI_COMM_WORLD,'out/tmp_disp',MPI_MODE_CREATE+MPI_MODE_WRONLY,mpi_info_null,fh,ierr)
+offset = myid*stnum*2*ntt
+call mpi_file_set_view(fh,offset*sizereal,mpi_real,mpi_real,"native",mpi_info_null,ierr)
+call mpi_file_write(fh,tmp_disp(1,1,1),stnum*2*ntt,mpi_real,mpi_status_ignore,ierr)
+call MPI_FILE_CLOSE(fh,ierr)
+call MPI_BARRIER(MPI_COMM_WORLD, ierr)
+
+!!!!!!!!!!!!!!
 !      normalized
 !      if(displacement(nsta,nps,mntt).gt.peak) then
 !      peak=displacement(nsta,nps,mntt)
