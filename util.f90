@@ -78,9 +78,10 @@ real,intent(in) :: intmsers(:)
 real,dimension(size(intmsers)),intent(out):: outmsers
 integer :: n,i
 n=size(intmsers)
-Loop: do i=1,n-1
-outmsers(i)=intmsers(i+1)-intmsers(i)
+Loop: do i=2,n-1
+outmsers(i)=(intmsers(i+1)-intmsers(i-1))/2
 end do Loop
+outmsers(1)=outmsers(2)
 outmsers(n)=outmsers(n-1)
 end subroutine
 end module

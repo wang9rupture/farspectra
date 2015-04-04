@@ -22,7 +22,7 @@ safr0 = safr0/saar0
 samo0(1)=samo0(1)*4*pi*rho*dist*vp**3/up
 samo0(2)=samo0(2)*4*pi*rho*dist*vs**3/us
 
-strdrop = 7./16.*samo0/rref**3
+strdrop = 7./16.*samo0/radius**3
 
 
 if(myid == master) then

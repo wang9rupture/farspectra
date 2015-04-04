@@ -268,7 +268,10 @@ fitspectrum(i,1:nfreq,j)=specfit(1:nfreq)
 !write(0,*) 'fc',myid,subarea(j),fcorn,falloffbest
 safc(i)=safc(i)+subarea(j)*fcorn
 safr(i)=safr(i)+subarea(j)*falloffbest
-samo(i)=samo(i)+subarea(j)*10**sig0	  
+
+!take care of this, 1- is spectra derived moment
+!1- samo(i)=samo(i)+subarea(j)*10**sig0	  
+samo(i)=samo(i)+subarea(j)*sum(displacement(i,:,j))*dt
 end do
 end do 
 

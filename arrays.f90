@@ -75,18 +75,18 @@ do l=1,stnum
   if (j==0) j=floor(360/degint)
   k = (l+intervsta*myid-j)/floor(360/degint) + 1
   phi=deg0+(j-1)*degint
-  theta=-90+(k-1)*degint
-  if (abs(theta+90) < 1e-4 .or. abs(theta-90) < 1e-4) then
+  theta=(k-1)*degint
+  if (abs(theta) < 1e-4 .or. abs(theta-180) < 1e-4) then
     subarea(l) = dist**2*0.25*sin((degint)*d2r/2.0)*(degint*d2r)**2
   else
-    subarea(l)=dist**2*sin((theta+90)*d2r)*(degint*d2r)**2
+    subarea(l)=dist**2*sin((theta)*d2r)*(degint*d2r)**2
   end if
   write(0,*) myid,phi,theta,subarea(l)
   saar = saar + subarea(l)
 
-  xyzstation(l,1)=origin(1)+dist*cos(theta*d2r)*cos(phi*d2r)
-  xyzstation(l,2)=origin(2)-dist*sin(theta*d2r)
-  xyzstation(l,3)=origin(3)+dist*cos(theta*d2r)*sin(phi*d2r)
+  xyzstation(l,1)=origin(1)+dist*sin(theta*d2r)*cos(phi*d2r)
+  xyzstation(l,2)=origin(2)+dist*sin(theta*d2r)*sin(phi*d2r)
+  xyzstation(l,3)=origin(3)+dist*cos(theta*d2r)
 end do
 write(0,*) 'saar:',myid,saar
 end subroutine
