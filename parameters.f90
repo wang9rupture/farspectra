@@ -10,6 +10,7 @@ use mpi
 integer :: j,l,k,ierr
 open( 22, file='parameters', status='old',iostat = k)
 
+read(22,*) yorp
 read(22,*) lx
 read(22,*) ly
 read(22,*) lz
@@ -23,8 +24,7 @@ read(22,*) vp
 read(22,*) vs
 read(22,*) soff
 read(22,*) getfc
-read(22,*) ifrq1f
-read(22,*) ifrq2f
+read(22,*) psfrqf
 read(22,*) fc1
 read(22,*) fc2
 read(22,*) cfc
@@ -38,6 +38,7 @@ read(22,*) rref
 
 close(22)
 if(myid == master) then
+write(0,*) 'Use Yongfei(1) or Peter(2)', yorp
 write(0,*) 'Dimension x meter ', lx
 write(0,*) 'Dimension y meter ',ly
 write(0,*) 'Dimension z meter ',lz
@@ -51,8 +52,8 @@ write(0,*) 'P wave velocity m/s ',vp
 write(0,*) 'S wave velocity m/s ',vs
 write(0,*) 'Only measure spect switch 1-no 2-yes ',soff
 write(0,*) 'Use getcorn or getcorn2 to measure fc', getfc
-write(0,*) 'Minimum freq Hz ',ifrq1f
-write(0,*) 'Maximum freq Hz ',ifrq2f
+write(0,*) 'Fitting P freq band Hz',psfrqf(1),psfrqf(2)
+write(0,*) 'Fitting S freq band Hz',psfrqf(3),psfrqf(4)
 write(0,*) 'Min fc',fc1
 write(0,*) 'Max fc',fc2
 write(0,*) 'weight frequency Hz',cfc
@@ -79,16 +80,15 @@ dt=dx/12500.0
 nt=floor(t/dt+1.5)
 ntt=floor(tt/dt+1.5)
 df=1./(dt*(ntt-1))
-nst=floor(360.0/degint)*(floor(180.0/degint)+1)
+nst=floor(360.0/degint)*(floor(180.0/degint))
 nfreq=(ntt-1)/2
-ifrq1=floor(ifrq1f/df+1)
-ifrq2=floor(ifrq2f/df+1)
 allocate( &
       xx(nx,ny),			&
 	yy(nx,ny),			&
 	zz(nx,ny),			&
-	normvector(3,nx,ny)	&
-)
+	normvector(3,nx,ny),	&
+	unit_norm(3,nx,ny)      &
+	)
 xx = 0.0
 yy = 0.0
 zz = 0.0
@@ -98,7 +98,6 @@ write(0,*) 'Dimension check:'
 write(0,*) 'nx ny nz ',nx,ny,nz
 write(0,*) 'dt nt ntt ',dt,nt,ntt
 write(0,*) 'df nst nfreq ',df,nst,nfreq
-write(0,*) 'freq band tested is',(ifrq1-1)*df,'Hz - ',(ifrq2-1)*df,'Hz'
 end if
 !     set ihypo at domain center
 ihypo(1)=(nx+1)/2
@@ -153,6 +152,9 @@ call mpi_bcast(zz(1,1),size(zz),mpi_real,0,mpi_comm_world,ierr)
 !print *,myid,xx(10,10),yy(10,10),zz(10,10),normvector(:,1,1)
 call arrays
 area=sqrt(sum(normvector*normvector, 1))
+unit_norm(1,:,:) = normvector(1,:,:)/area(:,:)
+unit_norm(2,:,:) = normvector(2,:,:)/area(:,:)
+unit_norm(3,:,:) = normvector(3,:,:)/area(:,:)
 call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 end subroutine
 

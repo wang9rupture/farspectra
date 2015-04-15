@@ -54,6 +54,16 @@ end do
 end do
 end function  
 
+function cross_product(a, b)
+    real, dimension(3) :: cross_product
+    real, dimension(3), intent(in) :: a, b
+ 
+    cross_product(1) = a(2)*b(3) - a(3)*b(2)
+    cross_product(2) = a(3)*b(1) - a(1)*b(3)
+    cross_product(3) = a(1)*b(2) - b(1)*a(2)
+end function cross_product
+  
+  
 subroutine rupradius    
 use m_globals
 integer :: i,j
@@ -74,14 +84,16 @@ write(0,*) 'Rupture Radius = ', radius ,' m'
 end subroutine 
 
 subroutine differ(intmsers,outmsers)
+use m_globals
 real,intent(in) :: intmsers(:)
 real,dimension(size(intmsers)),intent(out):: outmsers
 integer :: n,i
 n=size(intmsers)
 Loop: do i=2,n-1
-outmsers(i)=(intmsers(i+1)-intmsers(i-1))/2
+outmsers(i)=(intmsers(i+1)-intmsers(i))/dt
 end do Loop
-outmsers(1)=outmsers(2)
 outmsers(n)=outmsers(n-1)
 end subroutine
+
+
 end module

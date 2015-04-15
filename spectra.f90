@@ -247,6 +247,10 @@ safr = 0.0
 samo = 0.0
 do j=1,stnum
 do i=1,2
+ifrq1f = psfrqf(2*i-1)
+ifrq2f = psfrqf(2*i)
+ifrq1=floor(ifrq1f/df+1)
+ifrq2=floor(ifrq2f/df+1)
 spec = 0
 spec(:)=disspectrum(i,:,j)
 !print *,''

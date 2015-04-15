@@ -44,6 +44,7 @@ real :: &
         deg0,     &
         ifrq1f,   &
         ifrq2f,   &
+        psfrqf(4),   &
         cfc,      &
         fc1,      &
         fc2
@@ -60,20 +61,25 @@ integer :: &
 	  ifrq1,	&
 	  ifrq2,	&
 	  getfc,    &
-	  soff 
+	  soff,     &
+	  yorp      ! yongfei or peter
 
 integer :: &
 	  myid, numprocs, intervsta, stnum
 	  
 	  
 real, allocatable, target, dimension(:,:,:,:) :: &
-	  timeseries    
+	  timeseries,     &
+	  velocity,       &
+	  timedot,        &
+	  tmp_time    
 	  
 real, allocatable, target, dimension(:,:,:) :: &
    	  displacement,	&
    	  tmp_disp,       &
    	  disspectrum,	&
-   	  normvector
+   	  normvector,     &
+   	  unit_norm
    	  
 real, allocatable, target, dimension(:,:) :: &
 	  xyzstation,	&
@@ -83,6 +89,9 @@ real, allocatable, target, dimension(:,:) :: &
 	  slrx,           &
 	  slry,           &
 	  slrz,           &
+	  slrrx,          &
+	  slrry,          &
+	  slrrz,          &
 	  area,           &
 	  trup
 	  
@@ -97,16 +106,10 @@ real :: radius, rref !(rref set in simulation; radius is measured from trup)
 real :: sig0, fcorn, falloffbest, fitrms
 real,allocatable,dimension(:,:) :: &
 	asig0, afcorn, afalloffbest, afitrms
-real,dimension(2) :: safc,safr,samo, energy,tmp_energy!per processor, for reduction
+real,dimension(2) :: safc,safr,samo, energy!per processor, for reduction
 ! spherical average corner freq, fall-off rate, spectral level(moment),energy
-real,dimension(2) :: safc0,safr0,samo0,energy0,tmp_energy0 ! for receiving reduce result in master node
+real,dimension(2) :: safc0,safr0,samo0,energy0! for receiving reduce result in master node
 real :: saar,saar0
-
-
-!tmp code
-real,allocatable,dimension(:,:) :: radptn
-
-
 
 ! spherical area(discrete)
 real,allocatable,dimension(:,:,:) :: &

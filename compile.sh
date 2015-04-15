@@ -14,8 +14,8 @@
 
 #local laptop
 mpif90 -I/usr/local/include -fcheck=all -fcheck=bounds  fftw.f90 globals.f90  arrays.f90 util.f90 \
-parameters.f90 timeseries.f90 spectra.f90 stats.f90 waveform6.f90  -O3 -lfftw3 -lm -o ../example/waveform-m0
-
+parameters.f90 timeseries.f90 spectra.f90 stats.f90 waveform6.f90  -O3 -lfftw3 -lm -o ../example-2/waveform-m0
+cp ../example-2/waveform-m0 ../example-3/waveform-m0
 #cusco
 #mpif90   fftw.f90 globals.f90  arrays.f90 util.f90 \
 #parameters.f90 timeseries.f90 spectra.f90 stats.f90 waveform6.f90  -O3 -I/export/home/wang/local/fftwgnu/include \

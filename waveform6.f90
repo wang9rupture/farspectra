@@ -32,7 +32,13 @@ if(soff == 1) then
      recl=nx*ny*sizereal,form='unformatted',status='old')
   end if
   do it=1,nt
-      call compute_timeseries(it)
+      if(yorp == 1) then
+        call compute_timeseries_3(it)
+      elseif(yorp ==2) then
+        call compute_timeseries_2(it)
+      else
+        call compute_timeseries_1(it)
+      end if
       if(myid == master .and. mod(it-1,20).eq.0) then
       write(0,"(A,F5.1)") '% = ',real(it-1)/nt*100.0 
       end if

@@ -29,8 +29,9 @@ call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 !!
 allocate ( &
 	timeseries(2,3,ntt,stnum),   &
+	velocity(2,3,ntt,stnum),     &
+	timedot(2,3,ntt,stnum),       &
 	displacement(2,ntt,stnum),   &
-	tmp_disp(2,ntt,stnum),       &
 	disspectrum(2,nfreq,stnum), &
 	xyzstation(stnum,3),	   &	
 	asig0(2,stnum),      &
@@ -38,12 +39,13 @@ allocate ( &
 	afalloffbest(2,stnum),	&
 	afitrms(2,stnum),	&
 	fitspectrum(2,nfreq,stnum),&
-	subarea(stnum),         &
-	radptn(2,stnum),        & !1 is p wave
-	                          !2 is s wave 
+	subarea(stnum),         & 
 	slrx(nx,ny),            &
 	slry(nx,ny),		&
 	slrz(nx,ny),		&
+	slrrx(nx,ny),           &
+	slrry(nx,ny),           &
+	slrrz(nx,ny),           &
 	trup(nx,ny),             &
 	area(nx,ny),            &
 	in(ntt),			&
@@ -52,6 +54,8 @@ allocate ( &
 	specfit(nfreq)		&
 )
 timeseries = 0.0
+velocity = 0.0
+timedot = 0.0
 displacement = 0.0
 xyzstation = 0.0
 subarea = 0.0
@@ -68,7 +72,9 @@ samo0=0.0
 energy0=0.0
 saar =0.0
 saar0=0.0
-      
+ifrq1f = 0.0
+ifrq2f = 0.0
+    
 !! read station distributions
 !     reading station information
 !     nst is number of stations
@@ -78,18 +84,17 @@ do l=1,stnum
   if (j==0) j=floor(360/degint)
   k = (l+intervsta*myid-j)/floor(360/degint) + 1
   phi=deg0+(j-1)*degint
-  theta=(k-1)*degint
-  if (abs(theta) < 1e-4 .or. abs(theta-180) < 1e-4) then
-    subarea(l) = dist**2*0.25*sin((degint)*d2r/2.0)*(degint*d2r)**2
-  else
-    subarea(l)=dist**2*sin((theta)*d2r)*(degint*d2r)**2
-  end if
-  
+  theta = degint/2.+(k-1)*degint
+  subarea(l)=dist**2*sin((theta)*d2r)*(degint*d2r)**2
+!  phi=deg0+(j-1)*degint
+!  theta=(k-1)*degint
+!  if (abs(theta) < 1e-4 .or. abs(theta-180) < 1e-4) then
+!    subarea(l) = dist**2*0.25*sin((degint)*d2r/2.0)*(degint*d2r)**2
+!  else
+!    subarea(l)=dist**2*sin((theta)*d2r)*(degint*d2r)**2
+!  end if 
   saar = saar + subarea(l)
   
-  radptn(1,l) = abs(sin(2*theta*d2r)*cos(phi*d2r))
-  radptn(2,l) = sqrt((cos(2*theta*d2r)*cos(phi*d2r))**2 + &
-                (cos(theta*d2r)*sin(phi*d2r))**2)
 !  write(0,*) myid,phi,theta,subarea(l),radptn(:,l)
   xyzstation(l,1)=origin(1)+dist*sin(theta*d2r)*cos(phi*d2r)
   xyzstation(l,2)=origin(2)+dist*sin(theta*d2r)*sin(phi*d2r)
